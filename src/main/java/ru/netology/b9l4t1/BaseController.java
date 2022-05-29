@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class BaseController {
     @Autowired
     BaseRepository baseRepository;
 
     @GetMapping("/persons/by-city")
-    public Person getPersonByCity(@RequestParam(name = "city") String city) {
-        baseRepository.init();
+    public List getPersonByCity(@RequestParam(name = "city") String city) {
         return baseRepository.getPersonsByCity(city);
     }
 }
