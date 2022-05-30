@@ -1,18 +1,18 @@
 package ru.netology.b9l4t1;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 @Component
 public class BaseInit {
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @Transactional
     public void run() {
@@ -30,7 +30,7 @@ public class BaseInit {
                     .phoneNumber("+7(960) 960-00-0" + i)
                     .city(cities.get(random.nextInt(cities.size())))
                     .build();
-            entityManager.persist(person);
+            personRepository.save(person);
         });
     }
 
